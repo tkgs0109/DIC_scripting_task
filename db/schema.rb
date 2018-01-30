@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180130063606) do
+ActiveRecord::Schema.define(version: 20180130110933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "relationals", force: :cascade do |t|
+    t.integer "parent_id", null: false
+    t.integer "children_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["children_id"], name: "index_relationals_on_children_id", unique: true
+    t.index ["parent_id", "children_id"], name: "index_relationals_on_parent_id_and_children_id", unique: true
+    t.index ["parent_id"], name: "index_relationals_on_parent_id"
+  end
 
   create_table "tasks", force: :cascade do |t|
     t.integer "user_id"
@@ -22,23 +32,27 @@ ActiveRecord::Schema.define(version: 20180130063606) do
     t.time "time_required"
     t.integer "level"
     t.datetime "limit"
-    t.integer "parent_id"
-    t.integer "children_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["children_id"], name: "index_tasks_on_children_id"
-    t.index ["parent_id", "children_id"], name: "index_tasks_on_parent_id_and_children_id", unique: true
-    t.index ["parent_id"], name: "index_tasks_on_parent_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.string "email"
-    t.string "password_digest"
     t.text "icon"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end

@@ -1,0 +1,16 @@
+<h1>タスク一覧</h1>
+<div class="container">
+  <div>
+    <% @tasks.each do |task| %>
+      <div class="col-xs-12 col-md-6 blog-panel">
+        <h2 class="blogTitle"><%= blog.title %></h2>
+        <p class="blogContent"><%= blog.content %></p>
+        <div class="blog-links">
+          <%= link_to 'Show', blog, class:'btn btn-default' %>
+          <%= link_to 'Edit', edit_blog_path(blog), class:'btn btn-info' %>
+          <%= link_to 'Destroy', blog, method: :delete, data:{confirm:'Are you sure?'}, class:'btn btn-danger' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
