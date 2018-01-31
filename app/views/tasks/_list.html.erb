@@ -1,0 +1,14 @@
+<div>
+  <% @tasks.each do |task| %>
+    <div>
+      <p>Task_id:<%= task.id %></p>
+      <p>Task_level:<%= task.level %></p>
+      <p>Task_title:<%= task.title %></p>
+      <p>Task_content:<%= task.content %></p>
+      <div>
+        <%= link_to 'Show', task %>
+        <%= link_to 'New', new_task_path %>
+      </div>
+    </div>
+  <% end %>
+</div>

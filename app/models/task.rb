@@ -5,4 +5,8 @@ class Task < ApplicationRecord
   has_many :children_relationals, class_name: 'Relational', foreign_key: :children_id
   has_many :parent_task, through: :children_relationals, source: :parent
   has_many :children_tasks, through: :parent_relationals, source: :children
+
+  def has_children?(task)
+    task.children_tasks.any?
+  end
 end
