@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show]
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
   def index
-    @tasks = Task.where(:level=>1)
+    @tasks = Task.where(:level=>1, :user_id=>current_user.id)
   end
 
   def new
@@ -12,10 +12,15 @@ class TasksController < ApplicationController
 
   def create
     @newTask = Task.new(task_params)
+    @newTask.user_id = current_user.id
     if @newTask.save
-      @relational = Relational.new(params.require(:relational).permit(:parent_id).merge(children_id: @newTask.id))
-      @relational.save
-      redirect_to task_path(@newTask.parent_task), notice: "タスクを作成しました"
+      if @newTask.level == 1
+        redirect_to tasks_path, notice: "タスクを作成しました"
+      else
+        @relational = Relational.new(params.require(:relational).permit(:parent_id).merge(children_id: @newTask.id))
+        @relational.save
+        redirect_to :controller=>"tasks", :action=>"show", :id=>@newTask.parent_task.ids.first, notice: "タスクを作成しました"
+      end
     else
       render 'new'
     end
@@ -26,18 +31,26 @@ class TasksController < ApplicationController
   end
 
   def edit
+    @task = @newTask
   end
 
   def update
+    if @task.update(task_params)
+      redirect_to :controller=>"tasks", :action=>"show", :id=>@task.parent_task.ids.first, notice: "タスクを編集しました"
+    else
+      render 'edit'
+    end
   end
 
   def destroy
+    @task.destroy
+    redirect_to tasks_path, notice: "タスクを削除しました"
   end
 
 
   private
   def task_params
-    params.require(:task).permit(:user_id, :title, :content, :level)
+    params.require(:task).permit(:title, :content, :level)
   end
 
   def relational_params
@@ -51,5 +64,4 @@ class TasksController < ApplicationController
   def set_task
     @task = Task.find(params[:id])
   end
-
 end
