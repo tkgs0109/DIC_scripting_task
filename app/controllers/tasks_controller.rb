@@ -1,22 +1,21 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :new]
+  before_action :set_task, only: [:show]
   def index
     @tasks = Task.where(:level=>1)
   end
 
   def new
+    @task = Task.find_by(:id=>params[:format].to_i)
+    @relational = Relational.new
     @newTask = Task.new
   end
 
   def create
     @newTask = Task.new(task_params)
-    if @task.nil?
-      @newTask.level = 1
-    else
-      @newTask.level = @task.level + 1
-    end
     if @newTask.save
-      redirect_to tasks_path, notice: "タスクを作成しました"
+      @relational = Relational.new(params.require(:relational).permit(:parent_id).merge(children_id: @newTask.id))
+      @relational.save
+      redirect_to task_path(@newTask), notice: "タスクを作成しました"
     else
       render 'new'
     end
@@ -39,6 +38,10 @@ class TasksController < ApplicationController
   private
   def task_params
     params.require(:task).permit(:user_id, :title, :content, :level)
+  end
+
+  def relational_params
+    params.require(:relational).permit(:parent_id)
   end
 
   def has_children?(task)

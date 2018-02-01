@@ -7,7 +7,7 @@
       <p>Task_content:<%= task.content %></p>
       <div>
         <%= link_to 'Show', task %>
-        <%= link_to 'New', new_task_path %>
+        <%= link_to 'New', new_task_path(task) %>
       </div>
     </div>
   <% end %>
