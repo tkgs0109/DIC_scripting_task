@@ -1,2 +1,8 @@
 <h1><%= @task.title %>の子要素一覧</h1>
+<% if @task.level == 1 %>
+  <%= link_to '上へ', tasks_path %>
+<% else %>
+  <% parentTask = @task.parent_task.ids.first %>
+  <%= link_to '上へ', :controller=>"tasks", :action=>"show", :id=>parentTask %>
+<% end %>
 <%= render 'list' %>

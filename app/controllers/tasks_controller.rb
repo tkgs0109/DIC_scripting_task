@@ -15,7 +15,7 @@ class TasksController < ApplicationController
     if @newTask.save
       @relational = Relational.new(params.require(:relational).permit(:parent_id).merge(children_id: @newTask.id))
       @relational.save
-      redirect_to task_path(@newTask), notice: "タスクを作成しました"
+      redirect_to task_path(@newTask.parent_task), notice: "タスクを作成しました"
     else
       render 'new'
     end
