@@ -1,0 +1,2 @@
+class AddColumnToTask < ApplicationRecord
+end

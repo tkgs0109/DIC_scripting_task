@@ -4,8 +4,15 @@ class TasksController < ApplicationController
     @tasks = Task.where(:level=>1, :user_id=>current_user.id)
   end
 
+  def descendant
+    @descendantTasks = Task.where(:user_id=>current_user.id, :descendant=>true)
+  end
+
   def new
-    @task = Task.find_by(:id=>params[:format].to_i)
+    if @task ||= Task.find_by(:id=>params[:format].to_i)
+      @task.descendant = false
+      @task.save
+    end
     @relational = Relational.new
     @newTask = Task.new
   end
@@ -13,6 +20,7 @@ class TasksController < ApplicationController
   def create
     @newTask = Task.new(task_params)
     @newTask.user_id = current_user.id
+    @newTask.descendant = true
     if @newTask.save
       if @newTask.level == 1
         redirect_to tasks_path, notice: "タスクを作成しました"

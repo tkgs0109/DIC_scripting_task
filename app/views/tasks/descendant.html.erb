@@ -1,0 +1,15 @@
+<h1>タスク一覧</h1>
+<div>
+  <% @descendantTasks.each do |task| %>
+    <div>
+      <p>Task_id:<%= task.id %></p>
+      <p>Task_level:<%= task.level %></p>
+      <p>Task_title:<%= task.title %></p>
+      <p>Task_content:<%= task.content %></p>
+      <div>
+        <%= link_to 'Edit', edit_task_path(task) %>
+        <%= link_to 'Destroy', task, method: :delete, data:{confirm:'Are you sure?'} %>
+      </div>
+    </div>
+  <% end %>
+</div>
