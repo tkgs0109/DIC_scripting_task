@@ -1,12 +1,24 @@
 <h1>タスク一覧</h1>
+<%= link_to 'TOP', tasks_path %>
 <div>
-  <% @descendantTasks.each do |task| %>
+  <% @tasks.each do |task| %>
     <div>
+      <% if task.level != 1 %>
+        <p>Task_position:
+          <% task.clans.each do |id| %>
+            <%= Task.find(id).title + " > " %>
+          <% end %>
+        </p>
+      <% else %>
+        <p>Task_position: root</p>
+      <% end %>
       <p>Task_id:<%= task.id %></p>
       <p>Task_level:<%= task.level %></p>
       <p>Task_title:<%= task.title %></p>
       <p>Task_content:<%= task.content %></p>
       <div>
+        <%= link_to 'Show', task %>
+        <%= link_to 'New', new_task_path(task) %>
         <%= link_to 'Edit', edit_task_path(task) %>
         <%= link_to 'Destroy', task, method: :delete, data:{confirm:'Are you sure?'} %>
       </div>

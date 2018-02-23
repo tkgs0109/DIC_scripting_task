@@ -5,7 +5,7 @@ class TasksController < ApplicationController
   end
 
   def descendant
-    @descendantTasks = Task.where(:user_id=>current_user.id, :descendant=>true)
+    @tasks = Task.where(:user_id=>current_user.id, :descendant=>true)
   end
 
   def new
@@ -60,15 +60,9 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:title, :content, :level)
   end
-
   def relational_params
     params.require(:relational).permit(:parent_id)
   end
-
-  def has_children?(task)
-    task.children_tasks.any?
-  end
-
   def set_task
     @task = Task.find(params[:id])
   end
