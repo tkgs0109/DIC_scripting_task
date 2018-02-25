@@ -1,5 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :login_confirm
+
   def index
     @tasks = Task.where(:level=>1, :user_id=>current_user.id)
   end
@@ -65,5 +67,10 @@ class TasksController < ApplicationController
   end
   def set_task
     @task = Task.find(params[:id])
+  end
+  def login_confirm
+    unless user_signed_in? then
+      redirect_to new_user_session_path
+    end
   end
 end

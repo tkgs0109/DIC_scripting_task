@@ -1,6 +1,6 @@
 <div>
   <% if @task != nil %>
-    <p>Task_position:
+    <p>
       <% @task.clans_to_me.each do |id| %>
         <% task = Task.find(id) %>
         <% link_text = task.title %>
@@ -18,8 +18,8 @@
   <% @tasks.each do |task| %>
     <div class="row info-panel">
       <div class="contents col-xs-8">
-        <p>Task_title:<%= task.title %></p>
-        <p>Task_content:<%= task.content %></p>
+        <h2><%= task.title %></h2>
+        <p><%= task.content %></p>
       </div>
       <div class="links col-xs-4">
         <%= link_to '詳細', task, class:'btn btn-default' %>

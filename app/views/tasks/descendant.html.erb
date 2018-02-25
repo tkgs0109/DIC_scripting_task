@@ -4,7 +4,7 @@
   <% @tasks.each do |task| %>
     <div>
       <% if task.level != 1 %>
-        <p>Task_position:
+        <p>
           <% task.clans.each do |id| %>
             <% task_tmp = Task.find(id) %>
             <% link_text = task_tmp.title %>
@@ -19,12 +19,12 @@
           <% end %>
         </p>
       <% else %>
-        <p>Task_position: root</p>
+        <%= " > " %>
       <% end %>
       <div class="row info-panel">
         <div class="contents col-xs-8">
-          <p>Task_title:<%= task.title %></p>
-          <p>Task_content:<%= task.content %></p>
+          <h2><%= task.title %></h2>
+          <p><%= task.content %></p>
         </div>
         <div class="links col-xs-4">
           <%= link_to '詳細', task, class:'btn btn-default' %>

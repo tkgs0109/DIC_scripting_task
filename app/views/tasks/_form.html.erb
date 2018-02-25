@@ -1,11 +1,21 @@
 <%= form_with(model: @newTask, local: true) do |f| %>
+<% if @newTask.errors.any? %>
+  <div id="error_explanation">
+    <h3><%= @newTask.errors.count %>件のエラーがあります。</h3>
+    <ul>
+      <% @newTask.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 <table>
   <tr>
-    <td><%= f.label :title %></td>
+    <td><%= f.label :タスク名 %></td>
     <td><%= f.text_field :title %></td>
   </tr>
   <tr>
-    <td><%= f.label :content %></td>
+    <td><%= f.label :詳細 %></td>
     <td><%= f.text_field :content %></td>
   </tr>
 </table>
@@ -21,6 +31,6 @@
     <%= r.hidden_field :parent_id, value: parentId %>
   <% end %>
   <%= f.hidden_field :level, value: tmp %>
-  <%= f.submit %>
+  <%= f.submit "タスク作成" %>
 <% end %>
 </div>

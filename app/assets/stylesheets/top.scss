@@ -1,6 +1,6 @@
 header {
   width: 100%;
-  background-color: #2c3e50;
+  background-color: #4b4238;
   height: 54px;
 }
 
@@ -38,7 +38,7 @@ header ul:after {
 }
 
 .side_menu li{
-  background-color: #4D4D4D;
+  background-color: #ceca93;
   height: 6rem;
   margin-bottom: 10px;
   list-style: none;
@@ -62,7 +62,7 @@ header ul:after {
 
 footer {
   width: 100%;
-  background-color:#2c3e50;
+  background-color:#4b4238;
   padding: 20px 0 10px 0;
   color: white;
   margin: auto;
@@ -79,6 +79,7 @@ html {
 }
 
 body {
+  background-color: #fcfcf1;
   min-height: 100%;
   padding-bottom: 100px;
   color: #333;

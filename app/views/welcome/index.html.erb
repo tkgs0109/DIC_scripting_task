@@ -1,3 +1,20 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
-<%= link_to 'task#index', tasks_path %>
+<section class="main-header">
+  <div>
+    <h1>卒業課題アプリケーション</h1>
+  </div>
+</section>
+<section class="about">
+  <h1>タスク細分化法によるタスク管理アプリ</h1>
+  <h2>Task scripter</h2>
+  <div class="link-buttons">
+    <% if user_signed_in? %>
+      <%= link_to 'タスク一覧', tasks_path %>
+    <% else %>
+      <%= link_to 'LOGIN', new_user_session_path, class:'btn btn-default btn-lg' %>
+      <%= link_to 'SIGNUP', new_user_registration_path, class:'btn btn-primary btn-lg' %>
+    <% end %>
+  </div>
+  <p>
+    (説明)
+  </p>
+</section>
