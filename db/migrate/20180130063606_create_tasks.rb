@@ -5,6 +5,8 @@ class CreateTasks < ActiveRecord::Migration[5.1]
       t.text :title
       t.text :content
       t.time :time_required
+      t.boolean :descendant
+      t.boolean :done
       t.integer :level
       t.datetime :limit
 

@@ -39,7 +39,7 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = @newTask
+    @newTask = @task
   end
 
   def update

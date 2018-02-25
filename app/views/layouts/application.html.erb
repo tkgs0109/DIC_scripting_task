@@ -1,26 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>DeviseRails5</title>
+  <title>ScriptYourself</title>
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
   <header>
-    <nav>
+    <ul>
       <% if user_signed_in? %>
-      <strong><%= link_to current_user.email, edit_user_registration_path %></strong>
-      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+      <li><strong><%= link_to current_user.email, edit_user_registration_path %></strong></li>
+      <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
       <% else %>
-      <%= link_to 'サインアップ', new_user_registration_path %>
-      <%= link_to 'ログイン', new_user_session_path %>
+      <li><%= link_to 'サインアップ', new_user_registration_path %></li>
+      <li><%= link_to 'ログイン', new_user_session_path %></li>
       <% end %>
-    </nav>
+    </ul>
   </header>
-
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-  <%= yield %>
+  <div class = "wrapper row">
+    <aside class="side_menu col-xs-2">
+      <nav>
+        <ul>
+          <li><%= link_to 'タスク確認', tasks_descendant_path %></li>
+          <li><%= link_to '新規作成', new_task_path %></li>
+          <li><%= link_to 'タスクツリー確認', tasks_path %></li>
+        </ul>
+      </nav>
+    </aside>
+    <article class="container col-xs-10">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </article>
+  </div>
 </body>
+<footer class="footer">
+  <p>hogehoge</p>
+  <p>© 2018 Copyright oreore</p>
+</footer>
 </html>

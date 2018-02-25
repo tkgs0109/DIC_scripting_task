@@ -6,9 +6,12 @@ class Task < ApplicationRecord
   has_many :parent_task, through: :children_relationals, source: :parent
   has_many :children_tasks, through: :parent_relationals, source: :children, dependent: :destroy
 
+  validates :title, presence: true
+
   def has_children?
     self.children_tasks.any?
   end
+
   # 自分も含めた親子関係を配列で返すメソッド
   def clans_to_me
     clan = Array.new
@@ -24,6 +27,7 @@ class Task < ApplicationRecord
     end
     return clan
   end
+
   # 自分の親までの親子関係を配列で返すメソッド
   def clans
     clan = Array.new

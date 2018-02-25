@@ -10,17 +10,17 @@
   </tr>
 </table>
 <div>
+  <% if @task.nil? %>
+    <% tmp = 1 %>
+    <% parentId = 1 %>
+  <% else %>
+    <% tmp = @task.level.to_i + 1 %>
+    <% parentId = @task.id %>
+  <% end %>
+  <%= fields_for(@relational) do |r| %>
+    <%= r.hidden_field :parent_id, value: parentId %>
+  <% end %>
+  <%= f.hidden_field :level, value: tmp %>
+  <%= f.submit %>
+<% end %>
 </div>
-<% if @task.nil? %>
-  <% tmp = 1 %>
-  <% parentId = 1 %>
-<% else %>
-  <% tmp = @task.level.to_i + 1 %>
-  <% parentId = @task.id %>
-<% end %>
-<%= fields_for(@relational) do |r| %>
-  <%= r.hidden_field :parent_id, value: parentId %>
-<% end %>
-<%= f.hidden_field :level, value: tmp %>
-<%= f.submit %>
-<% end %>

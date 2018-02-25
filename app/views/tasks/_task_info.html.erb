@@ -1,0 +1,14 @@
+<div class="row info-panel">
+  <div class="contents col-xs-8">
+    <p>Task_id:<%= task.id %></p>
+    <p>Task_level:<%= task.level %></p>
+    <p>Task_title:<%= task.title %></p>
+    <p>Task_content:<%= task.content %></p>
+  </div>
+  <div class="links col-xs-4">
+    <%= link_to '詳細', task, class:'btn btn-default' %>
+    <%= link_to '下位タスク作成', new_task_path(task), class:'btn btn-default' %>
+    <%= link_to '編集', edit_task_path(task), class:'btn btn-info' %>
+    <%= link_to '削除', task, method: :delete, data:{confirm:'Are you sure?'}, class:'btn btn-danger' %>
+  </div>
+</div>
