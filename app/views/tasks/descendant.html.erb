@@ -6,10 +6,10 @@
       <% if task.level != 1 %>
         <p>Task_position:
           <% task.clans.each do |id| %>
-            <% task = Task.find(id) %>
-            <% link_text = task.title %>
-            <% if link_id = task.parent_task.ids.first != nil %>
-              <% link_id = task.parent_task.ids.first.to_i %>
+            <% task_tmp = Task.find(id) %>
+            <% link_text = task_tmp.title %>
+            <% if link_id = task_tmp.parent_task.ids.first != nil %>
+              <% link_id = task_tmp.parent_task.ids.first.to_i %>
               <% link = Task.find(link_id) %>
               <%= link_to link_text , task_path(link) %>
             <% else %>
