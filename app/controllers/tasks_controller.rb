@@ -46,7 +46,11 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to :controller=>"tasks", :action=>"show", :id=>@task.parent_task.ids.first, notice: "タスクを編集しました"
+      unless @task.level == 1
+        redirect_to :controller=>"tasks", :action=>"show", :id=>@task.parent_task.ids.first, notice: "タスクを編集しました"
+      else
+        redirect_to tasks_path, notice: "タスクを編集しました"
+      end
     else
       render 'edit'
     end

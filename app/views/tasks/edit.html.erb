@@ -1,14 +1,2 @@
-<h1>EDIT</h1>
-<%= form_with(model: @newTask, local: true) do |f| %>
-<table>
-  <tr>
-    <td><%= f.label :title %></td>
-    <td><%= f.text_field :title %></td>
-  </tr>
-  <tr>
-    <td><%= f.label :content %></td>
-    <td><%= f.text_field :content %></td>
-  </tr>
-</table>
-<%= f.submit %>
-<% end %>
+<h1>編集</h1>
+<%= render 'form' %>

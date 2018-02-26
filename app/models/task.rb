@@ -1,4 +1,6 @@
 class Task < ApplicationRecord
+  default_scope -> { order("tasks.id") }
+
   belongs_to :user
 
   has_many :parent_relationals, class_name: 'Relational', foreign_key: :parent_id

@@ -21,18 +21,20 @@
     </tr>
   </table>
   <div class="buttonArea">
-    <% if @task.nil? %>
-      <% tmp = 1 %>
-      <% parentId = 1 %>
-    <% else %>
-      <% tmp = @task.level.to_i + 1 %>
-      <% parentId = @task.id %>
+    <% if controller.action_name == "new" %>
+      <% if @task.nil? %>
+        <% tmp = 1 %>
+        <% parentId = 1 %>
+      <% else %>
+        <% tmp = @task.level.to_i + 1 %>
+        <% parentId = @task.id %>
+      <% end %>
+      <%= fields_for(@relational) do |r| %>
+        <%= r.hidden_field :parent_id, value: parentId %>
+      <% end %>
+      <%= f.hidden_field :level, value: tmp %>
     <% end %>
-    <%= fields_for(@relational) do |r| %>
-      <%= r.hidden_field :parent_id, value: parentId %>
-    <% end %>
-    <%= f.hidden_field :level, value: tmp %>
-    <%= f.submit "タスク作成" %>
+    <%= f.submit "保存" %>
   <% end %>
   </div>
 </div>
