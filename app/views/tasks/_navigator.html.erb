@@ -1,0 +1,12 @@
+<% ids.each do |id| %>
+  <% nav_task = Task.find(id) %>
+  <% link_text = nav_task.title %>
+  <% if link_id = nav_task.parent_task.ids.first != nil %>
+    <% link_id = nav_task.parent_task.ids.first.to_i %>
+    <% link = Task.find(link_id) %>
+    <%= link_to link_text , task_path(link) %>
+  <% else %>
+    <%= link_to link_text , tasks_path %>
+  <% end %>
+  <%= " > " %>
+<% end %>

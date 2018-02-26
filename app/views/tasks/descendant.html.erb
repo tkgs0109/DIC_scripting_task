@@ -2,35 +2,14 @@
 <%= link_to 'TOP', tasks_path %>
 <div>
   <% @tasks.each do |task| %>
-    <div>
-      <% if task.level != 1 %>
-        <p>
-          <% task.clans.each do |id| %>
-            <% task_tmp = Task.find(id) %>
-            <% link_text = task_tmp.title %>
-            <% if link_id = task_tmp.parent_task.ids.first != nil %>
-              <% link_id = task_tmp.parent_task.ids.first.to_i %>
-              <% link = Task.find(link_id) %>
-              <%= link_to link_text , task_path(link) %>
-            <% else %>
-              <%= link_to link_text , tasks_path %>
-            <% end %>
-            <%= " > " %>
-          <% end %>
-        </p>
-      <% else %>
-        <%= " > " %>
-      <% end %>
-      <div class="row info-panel">
-        <div class="contents col-xs-8">
-          <h2><%= task.title %></h2>
-          <p><%= task.content %></p>
-        </div>
-        <div class="links col-xs-4">
-          <%= link_to '詳細', task, class:'btn btn-default' %>
-          <%= link_to '下位タスク作成', new_task_path(task), class:'btn btn-default' %>
-          <%= link_to '編集', edit_task_path(task), class:'btn btn-info' %>
-          <%= link_to '削除', task, method: :delete, data:{confirm:'Are you sure?'}, class:'btn btn-danger' %>      </div>
-      </div>
+    <% if task.level != 1 %>
+      <p>
+        <% ids = task.clans %>
+        <%= render 'navigator', ids: ids %>
+      </p>
+    <% else %>
+      <p><%= " > " %></p>
+    <% end %>
+    <%= render 'taskpanel', task: task %>
   <% end %>
 </div>
