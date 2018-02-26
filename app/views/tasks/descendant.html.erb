@@ -2,7 +2,7 @@
 <%= link_to 'TOP', tasks_path %>
 <div class="taskDescendant">
   <% @tasks.each do |task| %>
-    <p class="navigator">
+    <p class="navigatorDescendant">
       <% if task.level != 1 %>
         <% ids = task.clans %>
         <%= render 'navigator', ids: ids %>

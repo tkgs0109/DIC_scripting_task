@@ -9,24 +9,30 @@
     </ul>
   </div>
 <% end %>
-<div>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-  <%= f.label :content %>
-  <%= f.text_area :content %>
-</div>
-<div>
-  <% if @task.nil? %>
-    <% tmp = 1 %>
-    <% parentId = 1 %>
-  <% else %>
-    <% tmp = @task.level.to_i + 1 %>
-    <% parentId = @task.id %>
+<div class="formArea">
+  <table>
+    <tr class="taskTitle">
+      <td><%= f.label :title %></td>
+      <td><%= f.text_field :title, :class => "titleField" %></td>
+    </tr>
+    <tr class="taskContent">
+      <td><%= f.label :content %></td>
+      <td><%= f.text_area :content, :size => "50x5" %></td>
+    </tr>
+  </table>
+  <div class="buttonArea">
+    <% if @task.nil? %>
+      <% tmp = 1 %>
+      <% parentId = 1 %>
+    <% else %>
+      <% tmp = @task.level.to_i + 1 %>
+      <% parentId = @task.id %>
+    <% end %>
+    <%= fields_for(@relational) do |r| %>
+      <%= r.hidden_field :parent_id, value: parentId %>
+    <% end %>
+    <%= f.hidden_field :level, value: tmp %>
+    <%= f.submit "タスク作成" %>
   <% end %>
-  <%= fields_for(@relational) do |r| %>
-    <%= r.hidden_field :parent_id, value: parentId %>
-  <% end %>
-  <%= f.hidden_field :level, value: tmp %>
-  <%= f.submit "タスク作成" %>
-<% end %>
+  </div>
 </div>
