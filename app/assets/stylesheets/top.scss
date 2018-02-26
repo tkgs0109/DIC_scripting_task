@@ -88,9 +88,7 @@ body {
   line-height: 18px;
 }
 
-div.info-panel {
-  margin: 20px 0;
-  padding: 10px;
-  border-style: solid;
-  border-width: 1px;
+div.field_with_errors {
+  background-color: #fcc;
+  padding: 2px;
 }

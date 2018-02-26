@@ -9,16 +9,12 @@
     </ul>
   </div>
 <% end %>
-<table>
-  <tr>
-    <td><%= f.label :タスク名 %></td>
-    <td><%= f.text_field :title %></td>
-  </tr>
-  <tr>
-    <td><%= f.label :詳細 %></td>
-    <td><%= f.text_field :content %></td>
-  </tr>
-</table>
+<div>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.label :content %>
+  <%= f.text_area :content %>
+</div>
 <div>
   <% if @task.nil? %>
     <% tmp = 1 %>

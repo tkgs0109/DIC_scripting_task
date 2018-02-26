@@ -1,15 +1,15 @@
 <h1>最小単位タスク</h1>
 <%= link_to 'TOP', tasks_path %>
-<div>
+<div class="taskDescendant">
   <% @tasks.each do |task| %>
-    <% if task.level != 1 %>
-      <p>
+    <p class="navigator">
+      <% if task.level != 1 %>
         <% ids = task.clans %>
         <%= render 'navigator', ids: ids %>
-      </p>
-    <% else %>
-      <p><%= " > " %></p>
-    <% end %>
+      <% else %>
+        <%= " > " %>
+      <% end %>
+    </p>
     <%= render 'taskpanel', task: task %>
   <% end %>
 </div>

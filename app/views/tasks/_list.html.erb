@@ -1,6 +1,6 @@
-<div>
+<div class="">
   <% if @task != nil %>
-    <p>
+    <p class="navigator">
       <% ids = @task.clans_to_me %>
       <%= render 'navigator', ids: ids %>
     </p>

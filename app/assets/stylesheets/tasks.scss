@@ -1,3 +1,29 @@
-// Place all the styles related to the tasks controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.links{
+  text-align: center;
+  vertical-align: middle;
+}
+
+p.taskTitle{
+
+}
+
+p.taskContent{
+
+}
+
+div.taskPanel {
+  margin: 0px 0px 20px 0px;
+  padding: 10px;
+  background-color: #d0cfb7;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .15);
+}
+
+div.taskList{
+
+}
+
+p.navigator{
+  margin: 10px 0px 0px 0px;
+  padding: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .15);
+}
