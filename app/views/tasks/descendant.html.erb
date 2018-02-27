@@ -1,7 +1,8 @@
 <h1>最小単位タスク</h1>
 <%= link_to 'TOP', tasks_path %>
 <div class="taskDescendant">
-  <% @tasks.each do |task| %>
+  <% @descendant_ids.each do |id| %>
+    <% task = Task.find(id) %>
     <p class="navigatorDescendant">
       <% if task.level != 1 %>
         <% ids = task.clans %>

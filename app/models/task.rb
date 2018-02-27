@@ -10,8 +10,15 @@ class Task < ApplicationRecord
 
   validates :title, presence: true
 
-  def has_children?
-    self.children_tasks.any?
+  def self.descendant_tasks(uid)
+    descendant_ids = Array.new
+    mytasks = Task.where(:user_id=>uid)
+    mytasks.each do |task|
+      unless task.children_tasks.any?
+        descendant_ids << task.id
+      end
+    end
+    return descendant_ids
   end
 
   # 自分も含めた親子関係を配列で返すメソッド
