@@ -64,9 +64,6 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:title, :content, :level, :done)
   end
-  # def task_complete
-  #   params.require(:task).permit(:done)
-  # end
   def relational_params
     params.require(:relational).permit(:parent_id)
   end
@@ -76,15 +73,6 @@ class TasksController < ApplicationController
   def login_confirm
     unless user_signed_in? then
       redirect_to new_user_session_path
-    end
-  end
-  def complete_task
-    if @task.done == false
-      @task.done = true
-      @task.save
-    else
-      @task.done = false
-      @task.save
     end
   end
 end
