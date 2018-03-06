@@ -15,19 +15,19 @@ class TasksController < ApplicationController
       @task.save
     end
     @relational = Relational.new
-    @newTask = Task.new
+    @new_task = Task.new
   end
 
   def create
-    @newTask = Task.new(task_params)
-    @newTask.user_id = current_user.id
-    if @newTask.save
-      if @newTask.level == 1
+    @new_task = Task.new(task_params)
+    @new_task.user_id = current_user.id
+    if @new_task.save
+      if @new_task.level == 1
         redirect_to tasks_path, notice: "タスクを作成しました"
       else
-        @relational = Relational.new(params.require(:relational).permit(:parent_id).merge(children_id: @newTask.id))
+        @relational = Relational.new(params.require(:relational).permit(:parent_id).merge(children_id: @new_task.id))
         @relational.save
-        redirect_to :controller=>"tasks", :action=>"show", :id=>@newTask.parent_task.ids.first, notice: "タスクを作成しました"
+        redirect_to :controller=>"tasks", :action=>"show", :id=>@new_task.parent_task.ids.first, notice: "タスクを作成しました"
       end
     else
       render 'new'
@@ -39,7 +39,7 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @newTask = @task
+    @new_task = @task
   end
 
   def update

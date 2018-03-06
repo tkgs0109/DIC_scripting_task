@@ -1,9 +1,9 @@
-<%= form_with(model: @newTask, local: true) do |f| %>
-<% if @newTask.errors.any? %>
+<%= form_with(model: @new_task, local: true) do |f| %>
+<% if @new_task.errors.any? %>
   <div id="error_explanation">
-    <h3><%= @newTask.errors.count %>件のエラーがあります。</h3>
+    <h3><%= @new_task.errors.count %>件のエラーがあります。</h3>
     <ul>
-      <% @newTask.errors.full_messages.each do |msg| %>
+      <% @new_task.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
     </ul>
