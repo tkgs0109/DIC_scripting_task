@@ -4,7 +4,7 @@
   <%= link_to '上へ', tasks_path %>
 <% else %>
   <% parentTask = @task.parent_task.ids.first %>
-  <%= link_to '上へ', :controller=>"tasks", :action=>"show", :id=>parentTask %>
+  <%= link_to '上へ', controller: "tasks", action: "show", id: parentTask %>
 <% end %>
 <%= link_to 'この階層に新規タスク作成', new_task_path(@task) %>
 <%= render 'list' %>
