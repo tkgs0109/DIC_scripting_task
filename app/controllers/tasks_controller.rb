@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_action :login_confirm
 
   def index
-    @tasks = Task.where(:level=>1, :user_id=>current_user.id)
+    @tasks = Task.where(level: 1, user_id: current_user.id)
   end
 
   def descendant
@@ -11,7 +11,7 @@ class TasksController < ApplicationController
   end
 
   def new
-    if @task ||= Task.find_by(:id=>params[:format].to_i)
+    if @task ||= Task.find_by(id: params[:format].to_i)
       @task.save
     end
     @relational = Relational.new
@@ -27,7 +27,7 @@ class TasksController < ApplicationController
       else
         @relational = Relational.new(params.require(:relational).permit(:parent_id).merge(children_id: @newTask.id))
         @relational.save
-        redirect_to :controller=>"tasks", :action=>"show", :id=>@newTask.parent_task.ids.first, notice: "タスクを作成しました"
+        redirect_to controller: "tasks", action: "show", id: @newTask.parent_task.ids.first, notice: "タスクを作成しました"
       end
     else
       render 'new'
