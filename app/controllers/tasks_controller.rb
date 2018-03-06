@@ -64,12 +64,15 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:title, :content, :level, :done)
   end
+
   def relational_params
     params.require(:relational).permit(:parent_id)
   end
+
   def set_task
     @task = Task.find(params[:id])
   end
+
   def login_confirm
     unless user_signed_in? then
       redirect_to new_user_session_path
