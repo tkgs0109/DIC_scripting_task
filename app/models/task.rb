@@ -12,7 +12,7 @@ class Task < ApplicationRecord
 
   def self.descendant_tasks(uid)
     descendant_ids = Array.new
-    mytasks = Task.where(:user_id=>uid)
+    mytasks = Task.where(user_id: uid)
     mytasks.each do |task|
       unless task.children_tasks.any?
         descendant_ids << task.id
