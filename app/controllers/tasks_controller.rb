@@ -43,7 +43,7 @@ class TasksController < ApplicationController
   end
 
   def update
-    if @task.update(task_params) || @task.update(task_complete)
+    if @task.update(task_params)
       unless @task.level == 1
         redirect_to task_path(@task.parent_task.first), notice: "タスクを編集しました"
       else
