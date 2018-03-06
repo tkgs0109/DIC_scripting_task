@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_action :login_confirm
 
   def index
-    @tasks = Task.where(level: 1, user_id: current_user.id)
+    @children_tasks = Task.where(:level=>1, :user_id=>current_user.id)
   end
 
   def descendant
@@ -11,7 +11,7 @@ class TasksController < ApplicationController
   end
 
   def new
-    if @task ||= Task.find_by(id: params[:format].to_i)
+    if @task ||= Task.find_by(:id=>params[:format].to_i)
       @task.save
     end
     @relational = Relational.new
@@ -27,11 +27,7 @@ class TasksController < ApplicationController
       else
         @relational = Relational.new(params.require(:relational).permit(:parent_id).merge(children_id: @new_task.id))
         @relational.save
-<<<<<<< HEAD
         redirect_to :controller=>"tasks", :action=>"show", :id=>@new_task.parent_task.ids.first, notice: "タスクを作成しました"
-=======
-        redirect_to controller: "tasks", action: "show", id: @newTask.parent_task.ids.first, notice: "タスクを作成しました"
->>>>>>> 85b8ecea470f127e59b61fb21d68c7d5ff1cf27d
       end
     else
       render 'new'
@@ -39,7 +35,7 @@ class TasksController < ApplicationController
   end
 
   def show
-    @tasks = @task.children_tasks
+    @children_tasks = @task.children_tasks
   end
 
   def edit
@@ -68,6 +64,9 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:title, :content, :level, :done)
   end
+  # def task_complete
+  #   params.require(:task).permit(:done)
+  # end
   def relational_params
     params.require(:relational).permit(:parent_id)
   end
@@ -77,6 +76,15 @@ class TasksController < ApplicationController
   def login_confirm
     unless user_signed_in? then
       redirect_to new_user_session_path
+    end
+  end
+  def complete_task
+    if @task.done == false
+      @task.done = true
+      @task.save
+    else
+      @task.done = false
+      @task.save
     end
   end
 end

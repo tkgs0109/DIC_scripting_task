@@ -5,7 +5,7 @@
       <%= render 'navigator', ids: ids %>
     </p>
   <% end %>
-  <% @tasks.each do |task| %>
+  <% @children_tasks.each do |task| %>
     <%= render 'taskpanel', task: task %>
   <% end %>
 </div>
