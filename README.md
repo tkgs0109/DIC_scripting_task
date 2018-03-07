@@ -22,5 +22,5 @@ AWS EC2のUbuntuインスタンスで構築しました。
 このインスタンス、及びにHeroku上での動作は確認済みです。
 
 ## Heroku
-以下にDeployしてあります。
+以下にDeployしてあります。  
 [Heroku](https://desolate-thicket-65811.herokuapp.com/)
