@@ -20,3 +20,7 @@ Rails 5.1.4
 ## 開発環境
 AWS EC2のUbuntuインスタンスで構築しました。
 このインスタンス、及びにHeroku上での動作は確認済みです。
+
+## Heroku
+以下にDeployしてあります。
+[Heroku](https://desolate-thicket-65811.herokuapp.com/)
